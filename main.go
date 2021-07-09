@@ -1,8 +1,7 @@
 package main
 
-import "time"
-
 func main() {
+	c.wg.Add(1)
 	Crawl("https://golang.org/", 4, fetcher)
-	time.Sleep(5 * time.Second)
+	c.wg.Wait()
 }

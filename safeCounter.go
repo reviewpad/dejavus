@@ -5,6 +5,7 @@ import "sync"
 type SafeCounter struct {
 	v   map[string]bool
 	mux sync.Mutex
+	wg  sync.WaitGroup
 }
 
 var c SafeCounter = SafeCounter{v: make(map[string]bool)}
