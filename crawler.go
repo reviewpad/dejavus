@@ -2,11 +2,13 @@ package main
 
 import "fmt"
 
+// First version as presented at:
+// https://gist.github.com/harryhare/6a4979aa7f8b90db6cbc74400d0beb49#file-exercise-web-crawler-go
 func Crawl(url string, depth int, fetcher Fetcher) {
-	// TODO: Fetch URLs in parallel.
-	// TODO: Don't fetch the same URL twice.
-	// This implementation doesn't do either:
 	if depth <= 0 {
+		return
+	}
+	if c.checkvisited(url) {
 		return
 	}
 	body, urls, err := fetcher.Fetch(url)
@@ -16,7 +18,7 @@ func Crawl(url string, depth int, fetcher Fetcher) {
 	}
 	fmt.Printf("found: %s %q\n", url, body)
 	for _, u := range urls {
-		Crawl(u, depth-1, fetcher)
+		go Crawl(u, depth-1, fetcher)
 	}
 	return
 }
